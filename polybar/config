@@ -1,0 +1,352 @@
+;==========================================================
+;
+;
+;   ██████╗  ██████╗ ██╗  ██╗   ██╗██████╗  █████╗ ██████╗
+;   ██╔══██╗██╔═══██╗██║  ╚██╗ ██╔╝██╔══██╗██╔══██╗██╔══██╗
+;   ██████╔╝██║   ██║██║   ╚████╔╝ ██████╔╝███████║██████╔╝
+;   ██╔═══╝ ██║   ██║██║    ╚██╔╝  ██╔══██╗██╔══██║██╔══██╗
+;   ██║     ╚██████╔╝███████╗██║   ██████╔╝██║  ██║██║  ██║
+;   ╚═╝      ╚═════╝ ╚══════╝╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
+;
+;
+;   To learn more about how to configure Polybar
+;   go to https://github.com/jaagr/polybar
+;
+;   The README contains alot of information
+;
+;==========================================================
+
+[colors]
+default_bg = #dd000000
+default_fg = #dfdfdf
+
+background-alt = #444
+foreground-alt = #555
+
+primary = #ffb52a
+secondary = #e60053
+
+alert = #bd2c40
+
+scheme_bv = #5543f5
+scheme_lb = #43d1f5
+scheme_vi = #ae43f5
+
+[bar/top]
+monitor = HDMI-0
+width = 100%
+height = 25
+;offset-x = 1%
+;offset-y = 1%
+radius = 0.0
+fixed-center = true
+
+background = ${colors.default_bg}
+foreground = ${colors.default_fg}
+
+border-size = 0
+border-color = #00000000
+
+padding-left = 0
+padding-right = 0
+
+module-margin-left = 0
+module-margin-right = 2
+
+font-0 = "URWGothic-Book:size=11;1"
+font-1 = "Font Awesome 5 Free:size=11;1"
+font-2 = "SauceCodePro Nerd Font Mono:size=12;1"
+font-3 = "SauceCodePro Nerd Font Mono:size=25"
+;font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
+;font-2 = siji:pixelsize=10;1
+
+modules-left = bspwm
+modules-center = date
+modules-right = filesystem memory cpu temperature eth pulseaudio powermenu
+
+tray-position = right
+tray-padding = 2
+;tray-background = #0063ff
+
+wm-restack = bspwm
+;wm-restack = i3
+
+;override-redirect = true
+
+;scroll-up = bspwm-desknext
+;scroll-down = bspwm-deskprev
+
+;scroll-up = i3wm-wsnext
+;scroll-down = i3wm-wsprev
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+[bar/bottom]
+monitor = DVI-I-0
+width = 100%
+height = 25
+;offset-x = 1%
+;offset-y = 1%
+radius = 0.0
+fixed-center = true
+
+bottom = true
+;pin-workspaces = true
+
+background = ${colors.default_bg}
+foreground = ${colors.default_fg}
+
+border-size = 0
+border-color = #00000000
+
+padding-left = 0
+padding-right = 0
+
+module-margin-left = 0
+module-margin-right = 2
+
+font-0 = "URWGothic-Book:size=11;1"
+font-1 = "Font Awesome 5 Free:size=11;1"
+font-2 = "SauceCodePro Nerd Font Mono:size=12;1"
+font-3 = "SauceCodePro Nerd Font Mono:size=25"
+;font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
+;font-2 = siji:pixelsize=10;1
+
+modules-left = 
+modules-center = date
+;modules-right = bspwm
+modules-right = ewmh
+
+wm-restack = bspwm
+
+;override-redirect = true
+
+;scroll-up = bspwm-desknext
+;scroll-down = bspwm-deskprev
+
+;scroll-up = i3wm-wsnext
+;scroll-down = i3wm-wsprev
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+[module/ewmh]
+type = internal/xworkspaces
+pin-workspaces = true
+
+[module/xwindow]
+type = internal/xwindow
+label = %title:0:30:...%
+
+[module/filesystem]
+type = internal/fs
+interval = 25
+
+mount-0 = /
+mount-1 = /home
+
+label-mounted = %{F#5543f5}%mountpoint%%{F-}%{F#43d1f5}: %percentage_used%%
+label-unmounted = %mountpoint% not mounted
+label-unmounted-foreground = ${colors.foreground-alt}
+
+[module/bspwm]
+type = internal/bspwm
+
+label-focused = %{T4}%{F#360d56}%{T- F-}%{T3}%{B#360d56}%{F#43d1f5}%index% %icon%%{T- B- F-}%{T4}%{B#dd000000}%{F#360d56}%{T- B- F-}
+;label-focused = %{T4}%{B#70000000}%{F#bb402060}%{B- F- T-}%{B#bb401950}%{F#43d1f5}%index% %icon%%{B- F-}%{T4}%{B#70000000}%{F#bb402060}%{B- F- T-}
+;label-focused = %{R}%{B#0000}%{T4}%{T-}%{B-}%{R}%{F#fff}  %index% %icon%  %{F-}%{R}%{B#0000}%{T4}%{T-}%{B-}%{R}
+;label-focused-background = ${colors.background-alt}
+;label-focused-background = #bb402060
+;label-focused-foreground = ${colors.scheme_lb}
+;label-focused-padding = 3
+
+label-occupied= %{T4}%{F#1d0530}%{T- F-}%{T3}%{B#1d0530}%{F#43d1f5}%index% %{T- B- F-}%{T4}%{B#dd000000}%{F#1d0530}%{T- B- F-}
+;label-occupied = %index%
+;label-occupied-foreground = ${colors.scheme_bv}
+;label-occupied-background = #aa000000
+;label-occupied-padding = 3
+
+label-urgent = %index%!
+label-urgent-background = ${colors.alert}
+label-urgent-padding = 3
+
+label-empty= %{T4}%{F#1d0530}%{T- F-}%{T3}%{B#1d0530}%{F#43d1f5} %{T- B- F-}%{T4}%{B#dd000000}%{F#1d0530}%{T- B- F-}
+;label-empty =
+;label-empty-foreground = ${colors.foreground-alt}
+;label-empty-padding = 3
+
+;
+ws-icon-0 = I;
+ws-icon-1 = II;
+ws-icon-2 = III;
+ws-icon-3 = IV;
+ws-icon-4 = V;
+ws-icon-5 = VI;
+ws-icon-6 = VII;
+ws-icon-7 = VIII;
+ws-icon-8 = IX;
+ws-icon-9 = X;
+ws-icon-default = 
+
+[module/mpd]
+type = internal/mpd
+format-online = %{A:rofimpd pl mouse:}<label-song>%{A}  <icon-prev> <icon-stop> <toggle> <icon-next>
+
+icon-prev = 
+icon-stop = 
+icon-play = 
+icon-pause = 
+icon-next = 
+
+label-song-maxlen = 40
+label-song-ellipsis = true
+
+format-online-padding = 1
+
+
+[module/cpu]
+type = internal/cpu
+interval = 2
+format-prefix = "CPU "
+format-prefix-foreground = ${colors.scheme_bv}
+label = %percentage:2%%
+label-foreground = ${colors.scheme_lb}
+
+[module/memory]
+type = internal/memory
+font = 4
+;format = <bar-used>
+interval = 2
+label = %percentage_used%%
+label-foreground = ${colors.scheme_lb}
+format-prefix = "RAM "
+format-prefix-foreground = ${colors.scheme_bv}
+
+bar-used-indicator =
+bar-used-width = 15
+bar-used-foreground-0 = ${colors.scheme_vi}
+;bar-used-foreground-1 = #557755
+;bar-used-foreground-2 = #f5a70a
+;bar-used-foreground-3 = #ff5555
+bar-used-empty-foreground = #444444
+bar-used-fill = ""
+bar-used-empty= ""
+;bar-used-fill = ""
+;bar-used-empty = ""
+bar-used-fill-font = 2
+bar-used-empty-font = 2
+
+[module/eth]
+type = internal/network
+interface = enp4s0
+interval = 3.0
+
+;
+format-connected-prefix = " "
+format-connected-prefix-foreground = ${colors.scheme_bv}
+label-connected = %local_ip%
+label-connected-foreground = ${colors.scheme_lb}
+
+format-disconnected =
+;format-disconnected = <label-disconnected>
+;format-disconnected-underline = ${self.format-connected-underline}
+;label-disconnected = %ifname% disconnected
+;label-disconnected-foreground = ${colors.foreground-alt}
+
+[module/date]
+type = internal/date
+interval = 5
+
+date = " %d/%b/%Y "
+;date-alt = " %d/%m/%Y "
+
+time = %H:%M
+;time-alt = %H:%M:%S
+
+format-prefix = "  "
+format-prefix-foreground = ${colors.scheme_bv}
+;format-prefix-background = #cc000000
+
+label = %time% %date%
+label-foreground = ${colors.scheme_lb}
+
+[module/pulseaudio]
+type = internal/pulseaudio
+sink = alsa_output.pci-0000_00_1b.0.analog-stereo
+
+format-volume-prefix = " "
+format-volume-prefix-foreground = ${colors.scheme_bv}
+format-volume = <label-volume>
+label-volume =  %percentage%%
+label-volume-foreground = ${colors.scheme_lb}
+
+label-muted = muted
+label-muted-foreground = #666
+
+[module/temperature]
+type = internal/temperature
+thermal-zone = 2
+warn-temperature = 60
+
+format = <label>
+format-warn = <label-warn>
+
+format-prefix = " "
+format-prefix-foreground = ${colors.scheme_bv}
+
+label =  %temperature-c%
+label-foreground = ${colors.scheme_lb}
+label-warn = %temperature-c%
+label-warn-foreground = ${colors.secondary}
+
+[module/powermenu]
+type = custom/menu
+
+expand-right = true
+
+format-spacing = 1
+
+label-open = "      "
+label-open-foreground = ${colors.secondary}
+label-open-background = #fd000000
+label-close = cancel
+label-close-foreground = ${colors.secondary}
+label-separator = |
+label-separator-foreground = ${colors.foreground-alt}
+
+menu-0-0 = suspend
+menu-0-0-exec = menu-open-1
+menu-0-1 = reboot
+menu-0-1-exec = menu-open-2
+menu-0-2 = power off
+menu-0-2-exec = menu-open-3
+
+menu-1-0 = cancel
+menu-1-0-exec = menu-open-0
+menu-1-1 = suspend
+menu-1-1-exec = systemctl suspend
+
+menu-2-0 = cancel
+menu-2-0-exec = menu-open-0
+menu-2-1 = reboot
+menu-2-1-exec = systemctl reboot 
+
+menu-3-0 = power off 
+menu-3-0-exec = systemctl poweroff
+menu-3-1 = cancel
+menu-3-1-exec = menu-open-0
+
+[settings]
+screenchange-reload = true
+;compositing-background = xor
+;compositing-background = screen
+;compositing-foreground = source
+;compositing-border = over
+;pseudo-transparency = false
+
+[global/wm]
+margin-top = 0
+margin-bottom = 0
+
+; vim:ft=dosini
