@@ -1,1 +1,1 @@
-# purple_rice
+# Purple and Blue rice
